@@ -150,6 +150,10 @@ if check_cask postman ; then
 	brew install --cask postman
 fi
 
+if check_cask visual-studio-code ; then
+	brew install --cask visual-studio-code
+fi
+
 # bear
 mas install 1091189122
 
