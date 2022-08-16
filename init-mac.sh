@@ -109,7 +109,7 @@ fi
 if check lima ; then
 	brew install lima
 fi
-echo "alias docker="lima nerdctl" >> ~/.zshrc
+echo 'alias docker="lima nerdctl"' >> ~/.alias
 
 # 맥 프로그램 설치
 if check_cask iterm2 ; then
