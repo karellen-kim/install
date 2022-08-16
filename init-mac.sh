@@ -28,11 +28,10 @@ function check_cask() {
 	fi
 }
 
-# zsh 설치
-if check zsh ; then
-	chsh -s `which zsh`
-	curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
-fi
+# ohmyzsh 설치
+sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+echo "" >> ~/.alias
+echo "source ~/.alias" >> ~/.zshrc
 
 # homebrew 설치
 if check brew ; then	
@@ -103,6 +102,15 @@ if check conda ; then
 	brew install anaconda
 fi
 
+if check gpg ; then
+	brew install gpg
+fi
+
+if check lima ; then
+	brew install lima
+fi
+echo "alias docker="lima nerdctl" >> ~/.zshrc
+
 # 맥 프로그램 설치
 if check_cask iterm2 ; then
 	brew install --cask iTerm2
@@ -168,3 +176,20 @@ mas install 441258766
 
 # owly
 mas install 882812218
+
+# git 설정
+read -p "이름을 입력하세요 : " name
+read -p "이메일을 입력하세요 : " email
+git config --global user.name $name
+git config --global user.email $email
+ssh-keygen -t rsa -C $email
+eval "$(ssh-agent -s)"
+ssh-add $HOME/.ssh/id_rsa
+pbcopy < $HOME/.ssh/id_rsa.pub
+echo "클립보드에 키가 복사되었습니다. SSH key를 붙여넣기 하세요."
+open "https://github.com/settings/ssh/new"
+read -p "enter를 누르면 다음 과정으로 진행합니다." next
+
+source ~/.zshrc
+
+ehco "완료되었습니다."
