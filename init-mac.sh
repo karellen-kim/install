@@ -140,6 +140,10 @@ if check_cask datagrip ; then
 	brew install --cask datagrip
 fi
 
+if check_cask lens ; then
+	brew install --cask lens
+fi
+
 # 상태창
 if check_cask eul ; then
 	brew install --cask eul
