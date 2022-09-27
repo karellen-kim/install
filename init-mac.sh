@@ -28,6 +28,8 @@ function check_cask() {
 	fi
 }
 
+softwareupdate --install --all
+
 # ohmyzsh 설치
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 echo "" >> ~/.alias
